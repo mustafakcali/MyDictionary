@@ -6,29 +6,41 @@ namespace MyDictionary
     {
         static void Main(string[] args)
         {
-            MyList<string> isimler = new MyList<string>();
-            isimler.Add("Mustafa");
-            isimler.Add("Umut");
-            isimler.Add("Berk");
-            Console.WriteLine(isimler.Count);
+            MyDictionary <int, string> students = new MyDictionary<int, string>();
+            students.Add(499, "Mustafa");
+            Console.WriteLine(students.Count);
+            students.Add(10,"Mert");
+            Console.WriteLine(students.Count);
+            students.Add(3, "Ahmet");
         }
     }
-    class MyList<T>
+    class MyDictionary<TKey,TValue>
     {
-        T[] items;
-        T[] tempArray;
+        TKey[] tKeys;
+        TValue[] tValues;
         public MyList()
         {
-            items = new T[0];
+            tKeys = new TKey[0];
+            tValues = new TValue[0];
         }
-        public void Add(T item)
+        public void Add(TKey key,TValue value)
         {
-            tempArray = items;
-            items = new T[items.Length + 1];
-            for (int i = 0; i < tempArray.Length; i++)
+            tempKeyArray = tKeys;
+            tKeys = new TKey[tKeys.Length + 1];
+            
+            for (int i = 0; i < tempKeyArray.Length; i++)
             {
-                items[i] = tempArray[i];
+                tKeys[i] = tempKeyArray[i];
             }
+            tKeys[tKeys.Length - 1] = key;
+            
+            tempValueArray = tValues;
+            tValues = new TValue[tValues.Length + 1];
+            for (int i = 0; i < tempValueArray.Length; i++)
+            {
+                tValues[i] = tempValueArray[i];
+            }
+            tValues[tValues.Length - 1] = value;
         }
 
         public int Count
